@@ -3,39 +3,22 @@ from typing import List
 
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        len1 = len(nums1)
-        len2 = len(nums2)
-        v1 = 0
-        v2 = 0
-        half = (len1+len2)//2+(len1+len2)%2
-        sign1 = 0
-        sign2 = 0
-        while sign1+sign2 <= half:
-            v1 = v2
-            if sign1+sign2 == len1+len2:
-                break;
-            elif sign2 == len2:
-                v2 = nums1[sign1]
-                sign1 += 1
-            elif sign1 == len1:
-                v2 = nums2[sign2]
-                sign2 += 1
-            elif nums1[sign1] <= nums2[sign2]:
-                v2 = nums1[sign1]
-                sign1 += 1
-            else:
-                v2 = nums2[sign2]
-                sign2 += 1
-
-        if (len1+len2) % 2:
-            return v1
+        """
+        nums = (nums1+nums2)
+        nums.sort()
+        """
+        nums = sorted(nums1+nums2)  # sorted() 比 sort() 更快,详见Python/package191009/test17.py
+        print(nums)
+        l = len(nums)
+        if l%2:
+            return nums[l//2]
         else:
-            return (v1+v2)/2
+            return (nums[int(l/2)-1]+nums[int(l/2)])/2
 
 def main():
     example = Solution()
-    list1 = [1, 3]
-    list2 = [2]
+    list1 = [1, 3, 5]
+    list2 = [2, 4, 5, 6]
     print(example.findMedianSortedArrays(list1, list2))
 
 
