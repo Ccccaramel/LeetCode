@@ -1,55 +1,70 @@
 import re
 
-
 class Solution:
     def myAtoi(self, str: str) -> int:
         if str == "" or str.isalpha():
             return 0
-        if str.isnumeric():
-            return int(str)
-        list0 = str.split(" ")
-        for s in list0:
-            if re.findall(r'\d+.\d+', s):
-                value = int(s.split(".")[0])
+        if str.isnumeric():  # 只有正数才为 True
+            result = int(str)
+            if result > pow(2,31):
+                return 2147483647
             else:
-                try:
-                    value = int(s)
-                except:
+                return result
+        str = str.strip()  # 去除首尾空格
+        sign = 0  # 0:不符合/中断   1:出现空格   2:下标为0/出现“+”“-”号   3:出现数字
+        flag = False
+        s0 = ""
+        symbol = 1
+        for i in range(len(str)):
+            if str[i] == " ":
+                sign = 1
+                continue
+            if ( (str[i] == "+" or str[i] == "-") and (sign == 1 or i == 0 ) ):
+                
+                if str[i] == "-":
+                    symbol = -1
+                sign = 2
+                continue
+            print(s0, sign,str[i],flag)
+            if (i == 0 or sign == 2) and str[i].isnumeric():
+                if flag == False and str[i] == "0" and i != 0:
                     continue
-            if -pow(2, 31) <= value <= pow(2, 31):
-                return value
+                else:
+                    flag = True
+                    sign = 2
+                    s0 += str[i]
+                    print(str[i])
             else:
-                return  -pow(2, 31)
-        return 0
-
-
-
+                if flag == True:
+                    break
+                sign = 0
+        print("s0:", s0)
+        if s0.isnumeric():
+            result = int(s0)*symbol
+            if result < (-pow(2,31)):
+                return -2147483648
+            if result > pow(2,31):
+                return 2147483647
+            else:
+                return result
+        else:
+            return 0
+            
 def main():
     example = Solution()
-    s1 = "6 is my lucky number"
-    s2 = "666"
-    s3 = "words and 987"
-    s4 = "-91283472332"
-    s5 = "-4"
-    s6 = "3.14159"
-    s7 = "4193 with words"
-    s8 = ".3"
-    s9 = " ++++"
-    s10 = "  0000000000012345678"
-    s11 = "-000000000000001"
-    # print(example.myAtoi(s8))
-    print(example.myAtoi(s3))#,
-          # example.myAtoi(s2),
-          # example.myAtoi(s3),
-          # example.myAtoi(s4),
-          # example.myAtoi(s5),
-          # example.myAtoi(s6),
-          # example.myAtoi(s7),
-          # example.myAtoi(s8),
-          # example.myAtoi(s9),
-          # example.myAtoi(s10),
-          # example.myAtoi(s11))
-
-
-if __name__ == "__main__":
-    main()
+    s1 = "4193 with words"
+    s2 = "4193"
+    s3 = ""
+    s4 = "-4"
+    s5 = "   -4193"
+    s6 = " ++++1"
+    s7 = "words and 987"
+    s8 = "3.14"
+    s9 = "  -3.14"
+    s10 = "  -+3.14"
+    s11 = "words and -987"
+    s12 = "-91283472332"
+    print(example.myAtoi(s12))
+    
+# if __name__ == "__main__":
+main()
