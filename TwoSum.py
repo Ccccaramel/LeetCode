@@ -80,7 +80,3 @@ def main():
     su = 9
     # twoSum(lis, su)  取消注释看看 -> 到底是什么
     print(sol.twoSum(lis, su))
-
-
-if __name__ == "__main__":
-    main()
