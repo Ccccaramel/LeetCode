@@ -1,5 +1,6 @@
 class Solution:
-    def reverse(self, x: int) -> int:
+    @staticmethod
+    def reverse(x: int) -> int:
         return (str(abs(x))[::-1])
 
 
