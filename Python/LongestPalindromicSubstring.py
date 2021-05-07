@@ -1,5 +1,6 @@
 import time
 
+
 # class Solution:
 #     def longestPalindrome(self, s: str) -> str:
 #         if len(s) <= 1 or s == s[::-1]:
@@ -28,33 +29,33 @@ class Solution:
         n = 0
         maxl = 0
         maxs = ""
-        if l<=0 or s == s[::-1]:
+        if l <= 0 or s == s[::-1]:
             return s
-        while n < l-1 and maxl < 2*(l-n):
-            width = maxl//2
-            if s[n] == s[n+1] and n-width>=0 and n+width+1<l and s[n-width] == s[n+width+1]:  # 无轴
+        while n < l - 1 and maxl < 2 * (l - n):
+            width = maxl // 2
+            if s[n] == s[n + 1] and n - width >= 0 and n + width + 1 < l and s[n - width] == s[n + width + 1]:  # 无轴
                 flag1 = n
-                flag2 = n+1
+                flag2 = n + 1
                 while 0 <= flag1 and flag2 < l and s[flag1] == s[flag2]:
                     flag1 -= 1
                     flag2 += 1
 
-                if flag2-flag1-1 > maxl:
-                    maxl = flag2-flag1-1
-                    maxs = s[flag1+1:flag2]
+                if flag2 - flag1 - 1 > maxl:
+                    maxl = flag2 - flag1 - 1
+                    maxs = s[flag1 + 1:flag2]
 
             # 有轴
             # 多行代码左移: shift+Tab
-            flag1 = n-1
-            flag2 = n+1
-            if s[flag1] == s[flag2] and s[flag1-width+1] == s[flag2+width-1]:
-                while 0<=flag1 and flag2 < l and s[flag1] == s[flag2]:
+            flag1 = n - 1
+            flag2 = n + 1
+            if s[flag1] == s[flag2] and s[flag1 - width + 1] == s[flag2 + width - 1]:
+                while 0 <= flag1 and flag2 < l and s[flag1] == s[flag2]:
                     flag1 -= 1
                     flag2 += 1
 
-            if flag2-flag1-1 > maxl:
-                maxl = flag2-flag1-1
-                maxs = s[flag1+1:flag2]
+            if flag2 - flag1 - 1 > maxl:
+                maxl = flag2 - flag1 - 1
+                maxs = s[flag1 + 1:flag2]
 
             n += 1
         return maxs
@@ -343,4 +344,4 @@ if __name__ == "__main__":
     t1 = time.time()
     main()
     t2 = time.time()
-    print(t2-t1)
+    print(t2 - t1)

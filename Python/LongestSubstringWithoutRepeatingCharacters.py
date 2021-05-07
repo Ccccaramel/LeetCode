@@ -5,9 +5,9 @@ class Solution:
         space = 0
         for i in range(len(s)):
             if s[i] in dic and space <= dic[s[i]]:
-                space = dic[s[i]]+1
+                space = dic[s[i]] + 1
             else:
-                maxV = max(maxV, i-space+1)
+                maxV = max(maxV, i - space + 1)
             dic[s[i]] = i
         return maxV
 

@@ -1,24 +1,22 @@
 # Definition for singly-linked list.
 
 
-
 class ListNode:
     def __init__(self, x):
         self.val = x
         self.next = None
 
 
-
 class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+    def add_two_numbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         l3 = None
-        listNode3 = l3
+        list_node3 = l3
         mark = 0
         while 1:
             add = 0
             if l1 is None and l2 is None:
                 if mark == 1:
-                    listNode3.next = ListNode(1)
+                    list_node3.next = ListNode(1)
                 return l3
             if l1:
                 add += l1.val
@@ -35,18 +33,20 @@ class Solution:
 
             if l3 is None:
                 l3 = ListNode(add)
-                listNode3 = l3
+                list_node3 = l3
             else:
-                listNode3.next = ListNode(add)
-                listNode3 = listNode3.next
+                list_node3.next = ListNode(add)
+                list_node3 = list_node3.next
             if l1:
                 l1 = l1.next
             if l2:
                 l2 = l2.next
+
+
 def main():
     sol = Solution()
-    listNode1 = None
-    listNode2 = None
+    list_node1 = None
+    list_node2 = None
 
     s = input()  # 输入字符串(合法前提下)
     s = s.replace(" ", "")  # 去除空格
@@ -57,43 +57,43 @@ def main():
         arr[x] = arr[x].split("->")
 
     print(arr)
-    node1 = listNode1
+    node1 = list_node1
     for x in range(len(arr[0])):
         if x == 0:
-            listNode1 = ListNode(int(arr[0][x]))
-            node1 = listNode1
+            list_node1 = ListNode(int(arr[0][x]))
+            node1 = list_node1
         else:
             node1.next = ListNode(int(arr[0][x]))
             node1 = node1.next
 
-    node2 = listNode2
+    node2 = list_node2
     for x in range(len(arr[1])):
         if x == 0:
-            listNode2 = ListNode(int(arr[1][x]))
-            node2 = listNode2
+            list_node2 = ListNode(int(arr[1][x]))
+            node2 = list_node2
         else:
             node2.next = ListNode(int(arr[1][x]))
             node2 = node2.next
 
     # print(type(listNode1))
-    node = listNode1
+    node = list_node1
     while 1:
-        print(node.val,type(node.val))
+        print(node.val, type(node.val))
         node = node.next
         if node is None:
             break
 
-    node = listNode2
+    node = list_node2
     while 1:
-        print(node.val,type(node.val))
+        print(node.val, type(node.val))
         node = node.next
         if node is None:
             break
     #
-    lis = sol.addTwoNumbers(listNode1, listNode2)
+    lis = sol.add_two_numbers(list_node1, list_node2)
     while 1:
         if lis is not None:
-            print("->",lis.val)
+            print("->", lis.val)
             lis = lis.next
 
 

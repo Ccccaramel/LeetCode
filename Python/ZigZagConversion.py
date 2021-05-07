@@ -1,21 +1,22 @@
-import math
 import time
 
+
 class Solution:
-    def convert(self, s: str, numRows: int) -> str:
+    @staticmethod
+    def convert(s: str, num_rows: int) -> str:
         length = len(s)
-        if length<=1 or length <= numRows or numRows <=1:
+        if length <= 1 or length <= num_rows or num_rows <= 1:
             return s
         list0 = {}
         mark = 0
         increment = 1
         for i in range(length):
-            if i < numRows:
+            if i < num_rows:
                 list0[i] = s[i]
             else:
                 list0[mark] += s[i]
             mark += increment
-            if 0 < mark < numRows-1:
+            if 0 < mark < num_rows - 1:
                 continue
             else:
                 increment = -increment
@@ -226,9 +227,9 @@ def main():
         "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789" \
         "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789" \
         "01234567890123456789012345678901234567890123456789"
-    numRows = 4
+    num_rows = 4
     example = Solution()
-    print(example.convert(s0, numRows))
+    print(example.convert(s0, num_rows))
 
 
 if __name__ == "__main__":
